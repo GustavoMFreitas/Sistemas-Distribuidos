@@ -48,7 +48,6 @@ public class cliente {
                     msg = newscan.nextLine();
                     ecreverARGS.add(msg);
                 }
-                System.out.print(ecreverARGS);
                 escreverJSON.put("args", ecreverARGS);
                 saida.println(escreverJSON.toJSONString());
                 newscan.close();
