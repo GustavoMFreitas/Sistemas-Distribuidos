@@ -124,7 +124,7 @@ public class servidor {
                 // Implementação da operação de escrita
                 String data = "";
                 fr.write(hm, "%");
-                for (int i = 0; i < args.size(); i++) {
+                for (int i = 0; i < args.size()-1; i++) {
                     data = (String) args.get(i);
                     fr.write(hm, data);
                 }
