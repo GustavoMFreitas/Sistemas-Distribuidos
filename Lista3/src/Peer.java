@@ -1,5 +1,3 @@
-
-
 /**
  * Lab05: Sistema P2P
  * 
@@ -94,7 +92,10 @@ public class Peer implements IMensagem{
     		String [] listaAlocados = servidorRegistro.list();
     		for(int i=0; i<listaAlocados.length;i++)
     			System.out.println(listaAlocados[i]+" ativo.");
-    		
+                
+    		System.out.println("Selecione um peer:");
+				for (int i = 1; i <= listaPeers.size(); i++)
+					System.out.println(i + " - " + listaPeers.get(i - 1));
     		System.out.println("Peer desejado: ");
                 Scanner at= new Scanner(System.in);
                 int sr= at.nextInt();
