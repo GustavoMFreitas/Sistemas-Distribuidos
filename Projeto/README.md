@@ -1,25 +1,18 @@
-# Ponto Inteligente
-API do sistema de ponto inteligente com Java e Spring Boot.
-### Detalhes da API RESTful
-A API RESTful de Ponto Inteligente contém as seguintes características:  
-* Projeto criado com Spring Boot e Java 8
-* Banco de dados MySQL com JPA e Spring Data JPA
-* Autenticação e autorização com Spring Security e tokens JWT (JSON Web Token)
-* Migração de banco de dados com Flyway
-* Testes unitários e de integração com JUnit e Mockito
-* Caching com EhCache
-* Integração contínua com TravisCI
-### Como executar a aplicação
-Certifique-se de ter o Maven instalado e adicionado ao PATH de seu sistema operacional, assim como o Git.
+# Projeto
+Sistema de reserva de assentos no cinema
+### Detalhes de configurações
+Para desenvolver o projeto foi utilizado:  
+* NetBeans IDE 18
+* JDK 1.8
+* Jakarta EE 8
+* PayaraServer V 5.193
+
+### ProjectServer
+Servidor RMI
 ```
-git clone https://github.com/m4rciosouza/ponto-inteligente-api.git
-cd ponto-inteligente-api
-mvn spring-boot:run
-Acesse os endpoints através da url http://localhost:8080
+### SoapService
+Servidor do WebService
 ```
-### Importando o projeto no Eclipse ou STS
-No terminal, execute a seguinte operação:
-```
-mvn eclipse:eclipse
-```
-No Eclipse/STS, importe o projeto como projeto Maven.
+### SoapClientProjeto
+
+Cliente RMI e SOAP para sistema
