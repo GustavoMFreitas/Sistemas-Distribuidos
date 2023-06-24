@@ -1,0 +1,3 @@
+br\JakartaRestConfiguration.class
+br\resources\JakartaEE8Resource.class
+br\ws\MovieService.class

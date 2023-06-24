@@ -1,0 +1,42 @@
+@options
+@packages
+-classpath
+'C:/Users/gusta/.m2/repository/org/jsoup/jsoup/1.16.1/jsoup-1.16.1.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'1.8'
+-sourcepath
+'D:/Projeto/SoapClientProjeto/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/Projeto/SoapClientProjeto/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'SoapClientProjeto 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'D:/Projeto/SoapClientProjeto/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'SoapClientProjeto 1.0-SNAPSHOT API'
+br
+C:\Users\gusta\.m2\repository\org\jsoup\jsoup\1.16.1\jsoup-1.16.1.jar = 1687478184143
+D:\Projeto\SoapClientProjeto\src\main\java = 1687474023594
+D:\Projeto\SoapClientProjeto\target\site\apidocs\allclasses-frame.html = 1687623306931
+D:\Projeto\SoapClientProjeto\target\site\apidocs\allclasses-noframe.html = 1687623306932
+D:\Projeto\SoapClientProjeto\target\site\apidocs\constant-values.html = 1687623306882
+D:\Projeto\SoapClientProjeto\target\site\apidocs\deprecated-list.html = 1687623306930
+D:\Projeto\SoapClientProjeto\target\site\apidocs\help-doc.html = 1687623306940
+D:\Projeto\SoapClientProjeto\target\site\apidocs\index-all.html = 1687623306928
+D:\Projeto\SoapClientProjeto\target\site\apidocs\index.html = 1687623306933
+D:\Projeto\SoapClientProjeto\target\site\apidocs\overview-tree.html = 1687623306903
+D:\Projeto\SoapClientProjeto\target\site\apidocs\package-list = 1687623306864
+D:\Projeto\SoapClientProjeto\target\site\apidocs\script.js = 1687623306942
+D:\Projeto\SoapClientProjeto\target\site\apidocs\stylesheet.css = 1687623306941
