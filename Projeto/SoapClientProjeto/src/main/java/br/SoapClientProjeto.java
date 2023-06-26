@@ -15,7 +15,8 @@ import java.util.Scanner;
  *
  * @author gusta
  * 
- * Classe responsável por realizar a interação do cliente com o servidor SOAP e RMI para a reserva de assentos no cinema.
+ *         Classe responsável por realizar a interação do cliente com o servidor
+ *         SOAP e RMI para a reserva de assentos no cinema.
  * 
  */
 public class SoapClientProjeto {
@@ -23,18 +24,21 @@ public class SoapClientProjeto {
         try {
             // Cria um scanner para receber a entrada do usuário
             Scanner scanner = new Scanner(System.in);
-            
+
             // URL do endpoint SOAP e ação SOAP a ser chamada
             String soapEndpointUrl = "http://localhost:8080/SoapServer/MovieServiceService?wsdl";
             String soapAction = "http://localhost:8080/SoapServer/MovieServiceService";
-            
+
             // Exibe uma mensagem inicial para o usuário
-            System.out.print("\n\nSistema para reserva de assentos no cinema.\n\n\n");
-            System.out.print("Antes de reservar, receba sugestões de filmes.\n");
-            System.out.print("Digite um gênero para receber uma sugestão (ação, drama, comédia, romance, terror, animação): ");
+            System.out.println("##########################################");
+            System.out.print("\nSISTEMA PARA RESERVA DE ASSENTOS NO CINEMA.\n\n");
+            System.out.println("##########################################");
+            System.out.print("\nAntes de reservar, receba sugestões de filmes.\n");
+            System.out.print(
+                    "Digite um gênero para receber uma sugestão (ação, drama, comédia, romance, terror, animação): ");
             String CAMPO1 = scanner.nextLine();
             System.out.print("\n\n");
-            
+
             // Chama o WebService SOAP
             SoapClient sc = new SoapClient(CAMPO1);
             sc.callSoapWebService(soapEndpointUrl, soapAction);
@@ -42,19 +46,25 @@ public class SoapClientProjeto {
             // Localiza o registro RMI
             Registry registry = LocateRegistry.getRegistry("localhost");
 
-            // Obtém a referência do objeto remoto do registro usando o nome fornecido durante o registro
+            // Obtém a referência do objeto remoto do registro usando o nome fornecido
+            // durante o registro
             CinemaReservation cinemaReservation = (CinemaReservation) registry.lookup("CinemaReservation");
 
             boolean exit = false;
-            
+
             // Solicita ao usuário que escolha uma ação
             while (!exit) {
-                System.out.print("\n\nEscolha uma ação:\nreservar - Para realizar uma reserva\ncancelar - Para cancelar uma reserva\nocupados - Para mostrar os assentos ocupados \nsair - Sair do programa\n");
-
+                System.out.println("##########OPÇÕES#########");
+                System.out.print("Escolha uma ação:\nreservar - Realizar uma reserva de assento.\n");
+                System.out.print("cancelar - Cancelar uma reserva de assento.\n");
+                System.out.print("ocupados - Mostrar os assentos ocupados. \n");
+                System.out.print("sair - Sair do programa.\n");
+                System.out.println("#########################");
+                System.out.print("Sua escolha: ");
                 String action = scanner.nextLine();
-                
+
                 String result = "";
-                
+
                 // Faz a chamada ao método remoto com base na ação escolhida
                 if (action.equalsIgnoreCase("reservar")) {
                     System.out.print("Digite o número do assento (Os assentos vão de A1 até E4): ");
@@ -63,15 +73,17 @@ public class SoapClientProjeto {
                 } else if (action.equalsIgnoreCase("cancelar")) {
                     System.out.print("Digite o número do assento (Os assentos vão de A1 até E4): ");
                     String seat = scanner.nextLine();
-                    result = cinemaReservation.cancelarReserva(seat); 
+                    result = cinemaReservation.cancelarReserva(seat);
                 } else if (action.equalsIgnoreCase("ocupados")) {
                     List<String> result1 = new ArrayList<>();
                     result1 = cinemaReservation.mostrarAssentosOcupados();
                     if (result1.isEmpty()) {
-                        System.out.print("\nTodos os assentos estão livres");
+                        System.out.print(
+                                "\nTodos os assentos estão livres\n_______________________________________________");
                     } else {
                         Collections.sort(result1);
-                        System.out.print("\nAssentos ocupados: " + result1);
+                        System.out.print("\nAssentos ocupados: " + result1
+                                + "\n_______________________________________________");
                     }
                 } else if (action.equalsIgnoreCase("sair")) {
                     exit = true;
@@ -79,7 +91,7 @@ public class SoapClientProjeto {
                 } else {
                     result = "\nAção inválida.";
                 }
-                
+
                 System.out.println(result);
                 sleep(1000);
             }

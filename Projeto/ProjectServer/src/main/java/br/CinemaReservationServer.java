@@ -16,14 +16,16 @@ import java.util.Map;
  *
  * @author gusta
  *
- * A classe CinemaReservationServer é a implementação do servidor de reserva de
- * cinema. Implementa a interface CinemaReservation, que define os métodos
- * remotos disponíveis para reserva e cancelamento de assentos.
+ *         A classe CinemaReservationServer é a implementação do servidor de
+ *         reserva de
+ *         cinema. Implementa a interface CinemaReservation, que define os
+ *         métodos
+ *         remotos disponíveis para reserva e cancelamento de assentos.
  */
 public class CinemaReservationServer implements CinemaReservation {
 
     private Map<String, Boolean> disponibilidadeAssentos; // Mapa para armazenar a disponibilidade dos assentos
-    private Object lock; // Objeto para sincronização de bloqueio
+    private Object tranca; // Objeto para sincronização de bloqueio
 
     /**
      * Construtor da classe CinemaReservationServer. Inicializa a
@@ -32,7 +34,7 @@ public class CinemaReservationServer implements CinemaReservation {
     public CinemaReservationServer() {
         disponibilidadeAssentos = new HashMap<>();
         inicializarDisponibilidadeAssentos();
-        lock = new Object();
+        tranca = new Object();
     }
 
     /**
@@ -59,14 +61,17 @@ public class CinemaReservationServer implements CinemaReservation {
      */
     @Override
     public String reservarAssento(String assento) throws RemoteException {
-        synchronized (lock) {
+        synchronized (tranca) {
+
             if (disponibilidadeAssentos.containsKey(assento)) {
                 boolean estaDisponivel = disponibilidadeAssentos.get(assento);
                 if (estaDisponivel) {
                     disponibilidadeAssentos.put(assento, false);
-                    return "\nAssento " + assento + " reservado com sucesso.";
+                    return "\nAssento " + assento
+                            + " reservado com sucesso.\n_______________________________________________";
                 } else {
-                    return "\nAssento " + assento + " já está reservado.";
+                    return "\nAssento " + assento
+                            + " já está reservado.\n_______________________________________________";
                 }
             } else {
                 return "\nNúmero de assento inválido.";
@@ -85,14 +90,16 @@ public class CinemaReservationServer implements CinemaReservation {
      */
     @Override
     public String cancelarReserva(String assento) throws RemoteException {
-        synchronized (lock) {
+        synchronized (tranca) {
             if (disponibilidadeAssentos.containsKey(assento)) {
                 boolean estaDisponivel = disponibilidadeAssentos.get(assento);
                 if (!estaDisponivel) {
                     disponibilidadeAssentos.put(assento, true);
-                    return "\nReserva para o assento " + assento + " cancelada.";
+                    return "\nReserva para o assento " + assento
+                            + " cancelada.\n_______________________________________________";
                 } else {
-                    return "\nAssento " + assento + " não está reservado.";
+                    return "\nAssento " + assento
+                            + " não está reservado.\n_______________________________________________";
                 }
             } else {
                 return "\nNúmero de assento inválido.";
@@ -108,13 +115,15 @@ public class CinemaReservationServer implements CinemaReservation {
      */
     @Override
     public List<String> mostrarAssentosOcupados() throws RemoteException {
-        List<String> assentosOcupados = new ArrayList<>();
-        for (Map.Entry<String, Boolean> entry : disponibilidadeAssentos.entrySet()) {
-            if (!entry.getValue()) {
-                assentosOcupados.add(entry.getKey());
+        synchronized (tranca) {
+            List<String> assentosOcupados = new ArrayList<>();
+            for (Map.Entry<String, Boolean> entry : disponibilidadeAssentos.entrySet()) {
+                if (!entry.getValue()) {
+                    assentosOcupados.add(entry.getKey());
+                }
             }
+            return assentosOcupados;
         }
-        return assentosOcupados;
     }
 
     /**
@@ -123,7 +132,7 @@ public class CinemaReservationServer implements CinemaReservation {
      * objeto remoto a um nome no registro e inicia a execução do servidor.
      *
      * @param args os argumentos de linha de comando (não são utilizados neste
-     * código)
+     *             código)
      */
     public static void main(String[] args) {
         try {
@@ -139,7 +148,7 @@ public class CinemaReservationServer implements CinemaReservation {
             // Associe o objeto remoto a um nome no registro
             registro.bind("CinemaReservation", stub);
 
-            System.out.println("Servidor de reserva de cinema está em execução.");
+            System.out.println("\n\nServidor de reserva de assentos está em execução.");
         } catch (Exception e) {
             System.err.println("Exceção do servidor: " + e.toString());
             e.printStackTrace();

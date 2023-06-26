@@ -64,7 +64,7 @@ public class SoapClient {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             soapResponse.writeTo(outputStream);
             String resultado = outputStream.toString();
-            Document document = Jsoup.parse(resultado);
+            Document document = Jsoup.parse(resultado); // Biblioteca para pegar apenas o return do XML de saida
             Elements returnElements = document.select("return");
 
             ArrayList<String> result = new ArrayList<>();
@@ -72,10 +72,8 @@ public class SoapClient {
             for (Element element : returnElements) {
                 result.add(element.text());
             }
-
-            System.out.println(result.get(gerador.nextInt(result.size())));
-            System.out.print("\n\n");
-
+            System.out.println("########SUGESTÃO########");
+            System.out.println("\'"+result.get(gerador.nextInt(result.size()))+"\'\n");
             soapConnection.close();
         } catch (Exception e) {
             System.out.println("ERRO:");
